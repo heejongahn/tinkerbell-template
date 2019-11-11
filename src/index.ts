@@ -1,7 +1,9 @@
-import candidates from "./data/candidates";
-import { fetchHouses } from "./remotes";
-import createIssue from "./github";
 import { format } from "date-fns";
+
+import { fetchHouses } from "./remotes";
+import { formatKRW } from "./utils";
+import createIssue from "./github";
+import candidates from "./data/candidates";
 
 async function main() {
   const sections: string[] = [];
@@ -17,7 +19,11 @@ async function main() {
             "",
             `## ${house.info.title}`,
             `<img src=${house.info.thumbnail} >`,
-            `${house.displayLocation} | ${house.price.deposit} / ${house.price.rent}(+ ${house.price.maintenance})\n`,
+            `${house.displayLocation} | ${formatKRW(
+              house.price.deposit,
+            )} / ${formatKRW(house.price.rent)}(+ ${formatKRW(
+              house.price.maintenance,
+            )})\n`,
             `${house.roomCount} ${house.contractType} | ${house.floor.target}/${house.floor.total} 층`,
             `[링크](https://www.peterpanz.com/house/${house.id})`,
             "",
@@ -30,7 +36,6 @@ async function main() {
   );
 
   const body = sections.join("\n\n");
-  console.log(body);
   createIssue(`${format(Date.now(), "yyyy-MM-dd")}일 새로 올라온 방`, body);
 }
 
