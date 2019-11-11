@@ -33,8 +33,8 @@ export interface Filter {
     deposit?: PriceRange;
   };
   bounds: {
-    upperLeft: Point;
-    lowerRight: Point;
+    max: Point;
+    min: Point;
   };
   roomFloors: RoomFloor[];
   roomCounts: RoomCount[];
@@ -48,8 +48,8 @@ export function constructFilterQueryParam(filter: Filter) {
   const { priceRange, bounds, roomFloors, roomCounts, contractTypes } = filter;
 
   const tokens: string[] = [
-    `latitude:${bounds.lowerRight.lat}~${bounds.upperLeft.lat}`,
-    `longitude:${bounds.lowerRight.lng}~${bounds.upperLeft.lng}`,
+    `latitude:${bounds.min.lat}~${bounds.max.lat}`,
+    `longitude:${bounds.min.lng}~${bounds.max.lng}`,
   ];
 
   if (priceRange.rent) {

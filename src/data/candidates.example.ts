@@ -28,24 +28,24 @@ const candidates: Filter[] = [
     id: "뚝섬 서울숲",
     ...commonFilter,
     bounds: {
-      upperLeft: { lat: 37.5558485, lng: 127.060802 },
-      lowerRight: { lat: 37.5317832, lng: 127.0328288 },
+      max: { lat: 37.5558485, lng: 127.060802 },
+      min: { lat: 37.5317832, lng: 127.0328288 },
     },
   },
   {
     id: "양재",
     ...commonFilter,
     bounds: {
-      upperLeft: { lat: 37.4854867, lng: 127.0506948 },
-      lowerRight: { lat: 37.4667919, lng: 127.0319895 },
+      max: { lat: 37.4854867, lng: 127.0506948 },
+      min: { lat: 37.4667919, lng: 127.0319895 },
     },
   },
   {
     id: "회사 근처",
     ...commonFilter,
     bounds: {
-      upperLeft: { lat: 37.508058, lng: 127.0463052 },
-      lowerRight: { lat: 37.4893626, lng: 127.0275955 },
+      max: { lat: 37.508058, lng: 127.0463052 },
+      min: { lat: 37.4893626, lng: 127.0275955 },
     },
   },
 ];
