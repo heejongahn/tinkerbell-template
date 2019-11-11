@@ -1,0 +1,32 @@
+{
+  "name": "tinkerbell",
+  "version": "1.0.0",
+  "description": "[피터팬의 좋은방 구하기][peterpan]에 올라온 새 방 GitHub actions로 받아보기",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "fetch": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heejongahn/tinkerbell.git"
+  },
+  "author": "heejongahn@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/heejongahn/tinkerbell/issues"
+  },
+  "homepage": "https://github.com/heejongahn/tinkerbell#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "date-fns": "^2.7.0",
+    "query-string": "^6.8.3",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.7.2"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/date-fns": "^2.6.0",
+    "@types/query-string": "^6.3.0"
+  }
+}
