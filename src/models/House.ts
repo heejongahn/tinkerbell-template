@@ -69,9 +69,9 @@ export class House {
   get isNew() {
     return (
       differenceInCalendarDays(
-        parse(this.info.liveStartedAt, "yyyy-MM-dd", Date.now()),
         Date.now(),
-      ) <= 2
+        parse(this.info.liveStartedAt.split(" ")[0], "yyyy-MM-dd", Date.now()),
+      ) < 2
     );
   }
 
@@ -87,7 +87,6 @@ export class House {
     };
 
     this.displayLocation = [
-      location.address.sido,
       location.address.sigungu,
       location.address.dong,
     ].join(" ");
