@@ -26,8 +26,6 @@ export async function fetchHouses(candidate: Filter): Promise<House[]> {
 
   const url = `${apiEndpoint}?${stringify(query)}`;
 
-  console.log(url);
-
   const { data } = await axios.get<FetchHousesResponse>(url, {
     headers: { "content-type": "application/json" },
   });
@@ -43,5 +41,5 @@ export async function fetchHouses(candidate: Filter): Promise<House[]> {
     );
   });
 
-  return houses.map(payload => new House(payload));
+  return houses.map(payload => new House(payload)).filter(h => h.isNew);
 }
