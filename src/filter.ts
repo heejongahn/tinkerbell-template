@@ -27,6 +27,7 @@ interface Point {
 }
 
 export interface Filter {
+  id: string;
   priceRange: {
     rent?: PriceRange;
     deposit?: PriceRange;

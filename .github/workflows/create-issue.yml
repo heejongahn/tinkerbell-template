@@ -1,0 +1,23 @@
+name: 새로 올라온 직거래 방 정보 받아오기
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: 0 11 * * *
+jobs:
+  fetch:
+    name: Fetch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: 이슈 생성
+        run: |
+          npm ci
+          npm run fetch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

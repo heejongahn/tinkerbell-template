@@ -25,6 +25,7 @@ const commonFilter = {
 
 const candidates: Filter[] = [
   {
+    id: "뚝섬 서울숲",
     ...commonFilter,
     bounds: {
       upperLeft: { lat: 37.5558485, lng: 127.060802 },
@@ -32,6 +33,7 @@ const candidates: Filter[] = [
     },
   },
   {
+    id: "양재",
     ...commonFilter,
     bounds: {
       upperLeft: { lat: 37.4854867, lng: 127.0506948 },
@@ -39,6 +41,7 @@ const candidates: Filter[] = [
     },
   },
   {
+    id: "회사 근처",
     ...commonFilter,
     bounds: {
       upperLeft: { lat: 37.508058, lng: 127.0463052 },
