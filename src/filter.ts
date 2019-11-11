@@ -8,7 +8,7 @@ export enum RoomFloor {
   higher = "6층 이상",
 }
 
-export enum RoomType {
+export enum RoomCount {
   oneRoom = "원룸",
   twoRooms = "투룸",
   threeAndMoreRooms = "쓰리룸 이상",
@@ -36,7 +36,7 @@ export interface Filter {
     lowerRight: Point;
   };
   roomFloors: RoomFloor[];
-  roomTypes: RoomType[];
+  roomCounts: RoomCount[];
   contractTypes: ContractType[];
   shouldIncludeHalfUndergrounds: boolean;
   shouldIncludeLofts: boolean;
@@ -44,7 +44,7 @@ export interface Filter {
 }
 
 export function constructFilterQueryParam(filter: Filter) {
-  const { priceRange, bounds, roomFloors, roomTypes, contractTypes } = filter;
+  const { priceRange, bounds, roomFloors, roomCounts, contractTypes } = filter;
 
   const tokens: string[] = [
     `latitude:${bounds.lowerRight.lat}~${bounds.upperLeft.lat}`,
@@ -69,8 +69,8 @@ export function constructFilterQueryParam(filter: Filter) {
     tokens.push(`roomCount_etc;[${totalRoomFloors.join(",")}]`);
   }
 
-  if (roomTypes.length > 0) {
-    tokens.push(`roomType;[${roomTypes.map(t => `"${t}"`).join(",")}]`);
+  if (roomCounts.length > 0) {
+    tokens.push(`roomType;[${roomCounts.map(t => `"${t}"`).join(",")}]`);
   }
 
   if (contractTypes.length > 0) {
