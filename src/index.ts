@@ -12,22 +12,40 @@ async function main() {
     candidates.map(async candidate => {
       const houses = await fetchHouses(candidate);
       const section = [
-        `# ${candidate.id}근처 ${houses.length}개`,
+        `# ${candidate.id}: ${houses.length}개`,
         "",
-        ...houses.map(house =>
-          [
-            "",
-            `## ${house.info.title}`,
-            `<img src=${house.info.thumbnail} >`,
-            `${house.displayLocation} | ${formatKRW(
-              house.price.deposit,
-            )} / ${formatKRW(house.price.rent)}(+ ${formatKRW(
-              house.price.maintenance,
-            )})\n`,
-            `${house.roomCount} ${house.contractType} | ${house.floor.target}/${house.floor.total} 층`,
-            `[링크](https://www.peterpanz.com/house/${house.id})`,
-            "",
-          ].join("\n"),
+        ...houses.map(
+          ({
+            displayLocation,
+            info,
+            price,
+            roomType,
+            roomCount,
+            contractType,
+            floor,
+            id,
+          }) => {
+            const title = `## [${displayLocation}] ${info.title}`;
+            const thumbnail = `<img src=${info.thumbnail} >`;
+            const deposit = formatKRW(price.deposit);
+            const monthly = ` ${formatKRW(price.rent)}<br>(+ ${formatKRW(
+              price.maintenance,
+            )})`;
+
+            const floorInfo = `총 ${floor.total}층 중 ${floor.target}층`;
+
+            return [
+              title,
+              thumbnail,
+              "",
+              `| 종류 | 보증금 | 월세<br>(+ 관리비) | 방 타입 | 층수 |`,
+              `| - | - | - | - | - |`,
+              `| ${roomCount} ${contractType} | ${deposit} | ${monthly} | ${roomType} | ${floorInfo} |`,
+              "",
+              `[바로가기](https://www.peterpanz.com/house/${id})`,
+              "<hr>",
+            ].join("\n");
+          },
         ),
       ].join("\n");
 
