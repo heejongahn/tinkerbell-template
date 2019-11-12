@@ -1,5 +1,5 @@
 import { ContractType, RoomCount } from "../filter";
-import { differenceInCalendarDays, parse } from "date-fns";
+import { parse, differenceInCalendarDays, addHours } from "date-fns";
 
 export type RoomType = "일반" | "옥탑" | "반지하" | "복층";
 
@@ -67,12 +67,16 @@ export class House {
   roomCount: RoomCount;
 
   get isNew() {
-    return (
-      differenceInCalendarDays(
-        Date.now(),
-        parse(this.info.createdAt.split(" ")[0], "yyyy-MM-dd", Date.now()),
-      ) < 2
+    // GitHub Action은 UTC 시간대에서 실행됨
+    const now = addHours(Date.now(), 9);
+    const createdAt = parse(
+      this.info.createdAt.split(" ")[0],
+      "yyyy-MM-dd",
+      Date.now(),
     );
+
+    const diff = differenceInCalendarDays(now, createdAt);
+    return diff < 2;
   }
 
   constructor(payload: HousePayload) {
