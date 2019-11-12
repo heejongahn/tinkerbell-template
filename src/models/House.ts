@@ -59,7 +59,7 @@ export class House {
   info: {
     title: string;
     thumbnail: string;
-    liveStartedAt: string;
+    createdAt: string;
   };
 
   contractType: ContractType;
@@ -70,7 +70,7 @@ export class House {
     return (
       differenceInCalendarDays(
         Date.now(),
-        parse(this.info.liveStartedAt.split(" ")[0], "yyyy-MM-dd", Date.now()),
+        parse(this.info.createdAt.split(" ")[0], "yyyy-MM-dd", Date.now()),
       ) < 2
     );
   }
@@ -96,7 +96,7 @@ export class House {
     this.info = {
       title: info.subject,
       thumbnail: info.thumbnail,
-      liveStartedAt: info.live_start_date,
+      createdAt: info.created_at,
     };
 
     this.contractType = type.contract_type;
