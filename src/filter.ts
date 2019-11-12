@@ -29,8 +29,12 @@ interface Point {
 export interface Filter {
   id: string;
   priceRange: {
-    rent?: PriceRange;
     deposit?: PriceRange;
+    rent?: PriceRange;
+    /**
+     * 월세 한도 판단에 관리비를 포함할지 여부
+     */
+    shouldIncludeMaintenance: boolean;
   };
   bounds: {
     max: Point;
@@ -62,6 +66,10 @@ export function constructFilterQueryParam(filter: Filter) {
     tokens.push(
       `checkDeposit:${priceRange.deposit.min || 999}~${priceRange.deposit.max}`,
     );
+  }
+
+  if (priceRange.shouldIncludeMaintenance) {
+    tokens.push('isManagerFee;["add"]');
   }
 
   if (roomFloors.length > 0) {
