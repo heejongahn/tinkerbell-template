@@ -32,7 +32,10 @@ export async function fetchHouses(candidate: Filter): Promise<House[]> {
 
   const { direct = { image: [] }, agency = { image: [] } } = data.houses;
 
-  const houses = [...direct.image, ...agency.image].filter(h => {
+  const houses = [
+    ...(direct.image ? direct.image : []), 
+    ...(agency.image ? agency.image : [])
+  ].filter(h => {
     return (
       (candidate.shouldIncludeHalfUndergrounds ||
         !h.info.is_half_underground) &&
